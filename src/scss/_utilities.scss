@@ -1,0 +1,44 @@
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.fr {
+  float: right !important;
+}
+.fl {
+  float: left !important;
+}
+.fi {
+  float: initial !important;
+}
+.m-auto {
+  margin: auto !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}
+.mr-auto {
+  margin-right: auto !important;
+}
+.mb-auto {
+  margin-bottom: auto !important;
+}
+.ml-auto {
+  margin-left: auto !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.w-percent-100 {
+  width: 100% !important;
+}
