@@ -1,0 +1,15 @@
+[
+  { "name": "default",   "color": "#409EFF", "remark": "默认色" },
+  { "name": "cyan",      "color": "#0BB2D4", "remark": "青色" },
+  { "name": "blue",      "color": "#3E8EF7", "remark": "蓝色" },
+  { "name": "green",     "color": "#11C26D", "remark": "绿色" },
+  { "name": "turquoise", "color": "#17B3A3", "remark": "蓝绿色" },
+  { "name": "indigo",    "color": "#667AFA", "remark": "靛青色" },
+  { "name": "brown",     "color": "#997B71", "remark": "棕色" },
+  { "name": "purple",    "color": "#9463F7", "remark": "紫色" },
+  { "name": "gray",      "color": "#757575", "remark": "灰色" },
+  { "name": "orange",    "color": "#EB6709", "remark": "橙色" },
+  { "name": "pink",      "color": "#F74584", "remark": "粉红色" },
+  { "name": "yellow",    "color": "#FCB900", "remark": "黄色" },
+  { "name": "red",       "color": "#FF4C52", "remark": "红色" }
+]
