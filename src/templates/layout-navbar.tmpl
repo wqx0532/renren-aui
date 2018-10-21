@@ -1,0 +1,74 @@
+<nav class="aui-navbar" :class="'aui-navbar--' + navbarLayoutType">
+  <div class="aui-navbar__header">
+    <h1 class="aui-navbar__brand">
+      <a class="aui-navbar__brand-lg" href="javascript:;">renren-aui</a>
+      <a class="aui-navbar__brand-mini" href="javascript:;">aui</a>
+    </h1>
+  </div>
+  <div class="aui-navbar__body">
+    <el-menu class="aui-navbar__menu mr-auto" mode="horizontal">
+      <el-menu-item index="1" @click="sidebarFold = !sidebarFold">
+        <svg class="icon-svg aui-navbar__icon-menu aui-navbar__icon-menu--switch" aria-hidden="true"><use xlink:href="#icon-suojin"></use></svg>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <a href="//www.renren.io/" target="_blank">
+          <svg class="icon-svg aui-navbar__icon-menu" aria-hidden="true"><use xlink:href="#icon-diqiu"></use></svg>
+        </a>
+      </el-menu-item>
+      <el-menu-item index="3" @click="refreshHandle()">
+        <svg class="icon-svg aui-navbar__icon-menu aui-navbar__icon-menu--refresh" aria-hidden="true"><use xlink:href="#icon-refresh"></use></svg>
+      </el-menu-item>
+    </el-menu>
+    <el-menu class="aui-navbar__menu" mode="horizontal">
+      <el-menu-item index="1" class="aui-navbar__search">
+        <i class="aui-navbar__icon-menu el-icon-search" @click="searchVisible = !searchVisible"></i>
+        <el-autocomplete
+          v-model="searchValue"
+          :fetch-suggestions="searchSuggestionsHandle"
+          placeholder="请输入内容"
+          class="aui-navbar__search-txt" :class="{ 'is-show': searchVisible }">
+        </el-autocomplete>
+      </el-menu-item>
+      <el-menu-item index="4" @click="fullscreenHandle()">
+        <svg class="aui-navbar__icon-menu icon-svg" aria-hidden="true"><use xlink:href="#icon-quanping"></use></svg>
+      </el-menu-item>
+      <el-menu-item index="3" class="aui-navbar__avatar">
+        <el-dropdown :show-timeout="0" placement="bottom">
+          <span class="el-dropdown-link">
+            <img src="../aui/img/avatar.png">
+            <span>{{ user.name }}</span>
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
+            <el-dropdown-item @click.native="logoutHandle()">退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-menu-item>
+    </el-menu>
+  </div>
+  <!-- 弹窗, 修改密码 -->
+  <el-dialog
+    title="修改密码"
+    :visible.sync="updatePasswordVisible"
+    :append-to-body="true">
+    <el-form :model="updatePasswordDataForm" :rules="updatePasswordDataRule" ref="updatePasswordDataForm" @keyup.enter.native="updatePasswordDataFormSubmit()" label-width="80px">
+      <el-form-item label="账号">
+        <span>{{ user.name }}</span>
+      </el-form-item>
+      <el-form-item label="原密码" prop="password">
+        <el-input type="password" v-model="updatePasswordDataForm.password" placeholder="原密码"></el-input>
+      </el-form-item>
+      <el-form-item label="新密码" prop="newPassword">
+        <el-input type="password" v-model="updatePasswordDataForm.newPassword" placeholder="新密码"></el-input>
+      </el-form-item>
+      <el-form-item label="确认密码" prop="confirmPassword">
+        <el-input type="password" v-model="updatePasswordDataForm.confirmPassword" placeholder="确认密码"></el-input>
+      </el-form-item>
+    </el-form>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="updatePasswordVisible = false">取消</el-button>
+      <el-button type="primary" @click="updatePasswordDataFormSubmit()">确定</el-button>
+    </span>
+  </el-dialog>
+</nav>

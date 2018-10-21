@@ -1,0 +1,17 @@
+<aside class="aui-sidebar" :class="'aui-sidebar--' + sidebarLayoutSkin">
+  <div class="aui-sidebar__inner">
+    <el-menu
+      :default-active="sidebarMenuActiveName"
+      :collapse="sidebarFold"
+      :unique-opened="true"
+      :collapse-transition="false"
+      class="aui-sidebar__menu">
+      <aui-sidebar-submenu
+        v-for="menu in sidebarMenuList"
+        :key="menu.id"
+        :menu="menu"
+        :sidebar-layout-skin="sidebarLayoutSkin">
+      </aui-sidebar-submenu>
+    </el-menu>
+  </div>
+</aside>
