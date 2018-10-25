@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>renren-aui</title>
-  <link rel="stylesheet" href="../aui/theme/default/index.css">
-  <link rel="stylesheet" href="../aui/theme/default/aui.css">
+  <link rel="stylesheet" href="../element-theme/default/index.css">
 </head>
 <body>
   <div
@@ -160,6 +159,283 @@
   <script src="../plugins/qs-6.5.2/qs.min.js"></script>
   <script src="../icons/iconfont.js"></script>
   <script src="../plugins/screenfull-3.3.2/screenfull.min.js"></script>
-  <script src="../js/utils.js"></script>
+  <script>
+  (function () {
+    var vm = window.vm = new Vue({
+      el: '.aui-wrapper',
+      data: function () {
+        var validateUpdatePasswordConfirmPassword = function (rule, value, callback) {
+          if (vm.updatePasswordDataForm.newPassword !== value) {
+            callback(new Error('确认密码与新密码不一致'));
+          } else {
+            callback();
+          }
+        }
+        return {
+          loading: true,
+          // 导航条, 布局风格, defalut(白色) / colorful(鲜艳)
+          navbarLayoutType: 'defalut',
+          // 侧边栏, 布局皮肤, default(白色) / dark(黑色)
+          sidebarLayoutSkin: 'dark',
+          // 侧边栏, 折叠状态
+          sidebarFold: false,
+          // 侧边栏, 菜单
+          sidebarMenuList: [],
+          sidebarMenuActiveName: '',
+          // 内容是否通过tab展示
+          isTab: true,
+          // 内容标签页
+          contentTabs: [],
+          contentTabsActiveName: '',
+          // 用户信息
+          user: {
+            id: 0,
+            name: ''
+          },
+          // 搜索
+          searchVisible: false,
+          searchValue: '',
+          // 修改密码
+          updatePasswordVisible: false,
+          updatePasswordDataForm: {
+            password: '',
+            newPassword: '',
+            confirmPassword: ''
+          },
+          updatePasswordDataRule: {
+            password: [
+              { required: true, message: '必填项不能为空', trigger: 'blur' }
+            ],
+            newPassword: [
+              { required: true, message: '必填项不能为空', trigger: 'blur' }
+            ],
+            confirmPassword: [
+              { required: true, message: '必填项不能为空', trigger: 'blur' },
+              { validator: validateUpdatePasswordConfirmPassword, trigger: 'blur' }
+            ]
+          }
+        }
+      },
+      beforeCreate () {
+        vm = this;
+      },
+      created () {
+        axios.all([
+          vm.getUserInfo(),
+          vm.getMenuList()
+        ]).then(function () {
+          vm.loading = false;
+          // 注册组件, 侧边栏子菜单
+          fnRegistrationAuiSidebarSubmenu();
+          // 监听, tab添加事件
+          vm.$on('tabAddHandle', vm.tabAddHandle);
+          // 初始默认选中菜单
+          vm.contentTabs.push({
+            'name': '1001',
+            'title': '分析页',
+            'isTabClosable': false,
+            'isIframe': true,
+            'url': './modules/dashboard/analysis.html'
+          });
+          vm.sidebarMenuActiveName = '1001';
+          vm.contentTabsActiveName = '1001';
+        });
+      },
+      mounted () {
+        // 窗口resize实现媒体查询
+        vm.sidebarFold = document.documentElement['clientWidth'] <= 992 || false;
+        window.addEventListener('resize', _.debounce(function () {
+          vm.sidebarFold = document.documentElement['clientWidth'] <= 992 || false;
+        }, 150));
+      },
+      methods: {
+        // 获取当前管理员信息
+        getUserInfo: function () {
+          return axios.get('../aui/json/sys-user-info.json').then(function (res) {
+            if (res.data && res.data.code === 0) {
+              vm.user.id = res.data.user.userId;
+              vm.user.name = res.data.user.username;
+            }
+          });
+        },
+        // 获取菜单列表
+        getMenuList: function () {
+          return axios.get('../aui/json/sys-menu-nav.json').then(function (res) {
+            if (res.data && res.data.code === 0) {
+              vm.sidebarMenuList = res.data.data;
+            }
+          })
+        },
+        // 刷新
+        refreshHandle () {
+          var iframeBox = document.querySelector('#pane-' + vm.contentTabsActiveName + ' iframe');
+          if (iframeBox) {
+            iframeBox.contentWindow.location.reload(true);
+          }
+        },
+        // 搜索提示
+        searchSuggestionsHandle (queryString, cb) {
+          cb([
+            { value: '搜索提示一' },
+            { value: '搜索提示二' },
+            { value: '搜索提示三' }
+          ]);
+        },
+        // 全屏
+        fullscreenHandle () {
+          if (!screenfull.enabled) {
+            return vm.$message({
+              message: '您的浏览器不支持此操作',
+              type: 'warning',
+              duration: 1500
+            });
+          }
+          screenfull.toggle();
+        },
+        // 修改密码
+        updatePasswordHandle () {
+          vm.updatePasswordVisible = true;
+          vm.$nextTick(function () {
+            vm.$refs['updatePasswordDataForm'].resetFields();
+          });
+        },
+        // 修改密码, 表单提交
+        updatePasswordDataFormSubmit () {
+          vm.$refs['updatePasswordDataForm'].validate(function (valid) {
+            if (valid) {
+              vm.$message({
+                message: '操作成功：' + JSON.stringify({
+                  password: vm.updatePasswordDataForm.password,
+                  newPassword: vm.updatePasswordDataForm.newPassword,
+                  confirmPassword: vm.updatePasswordDataForm.confirmPassword
+                }),
+                type: 'success',
+                duration: 1500,
+                onClose: function () {
+                  vm.updatePasswordVisible = false;
+                }
+              });
+            }
+          });
+        },
+        // 退出
+        logoutHandle () {
+          this.$confirm(`确定进行[退出]操作?`, '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(function () {
+            window.location.href = './login.html';
+          }).catch(function () {});
+        },
+        // tabs, 添加tab
+        tabAddHandle (menu) {
+          var tab = vm.contentTabs.filter(function (item) {
+            return item.name === menu.id + '';
+          })
+          if (tab.length <= 0) {
+            tab = {
+              'name': menu.id + '',
+              'title': menu.title,
+              'isTabClosable': true,
+              'isIframe': true,
+              'url': menu.url
+            }
+            vm.contentTabs = vm.contentTabs.concat(tab);
+          } else {
+            tab = tab[0];
+          }
+          vm.sidebarMenuActiveName = vm.contentTabsActiveName = tab.name;
+        },
+        // tabs, 删除tab
+        tabRemoveHandle (tabName) {
+          vm.contentTabs = vm.contentTabs.filter(function (item) {
+            return item.name !== tabName;
+          });
+          if (vm.contentTabs.length >= 1) {
+            // 当前选中tab被删除
+            if (tabName === vm.contentTabsActiveName) {
+              vm.sidebarMenuActiveName = vm.contentTabsActiveName = vm.contentTabs[vm.contentTabs.length - 1].name;
+            }
+          } else {
+            vm.sidebarMenuActiveName = '';
+            vm.contentTabsActiveName = 'home';
+          }
+        },
+        // tabs, 选中tab
+        tabSelectedHandle (tab) {
+          tab = vm.contentTabs.filter(function (item) {
+            return item.name === tab.name;
+          });
+          vm.sidebarMenuActiveName = tab.length >= 1 ? tab[0].name : '';
+        },
+        // tabs, 关闭当前
+        tabsCloseCurrentHandle () {
+          if (vm.contentTabsActiveName !== 'home') {
+            vm.tabRemoveHandle(vm.contentTabsActiveName);
+          }
+        },
+        // tabs, 关闭其它
+        tabsCloseOtherHandle () {
+          vm.contentTabs = vm.contentTabs.filter(function (item) {
+            return item.name === 'home' || item.name === vm.contentTabsActiveName;
+          });
+        },
+        // tabs, 关闭全部
+        tabsCloseAllHandle () {
+          vm.contentTabs = vm.contentTabs.filter(function (item) {
+            return item.name === 'home';
+          });
+          vm.sidebarMenuActiveName = '';
+          vm.contentTabsActiveName = 'home';
+        }
+      }
+    });
+
+    /**
+    * 注册组件, 侧边栏子菜单
+    */
+    function fnRegistrationAuiSidebarSubmenu () {
+      Vue.component('aui-sidebar-submenu', {
+        template: '\
+          <el-submenu\
+            v-if="menu.children && menu.children.length >= 1"\
+            :index="menu.id + \'\'"\
+            :popper-class="\'aui-sidebar--\' + sidebarLayoutSkin + \'-popper\'">\
+            <template slot="title">\
+              <svg class="aui-sidebar__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
+              <span>{{ menu.title }}</span>\
+            </template>\
+            <aui-sidebar-submenu\
+              v-for="item in menu.children"\
+              :key="item.id"\
+              :menu="item"\
+              :sidebar-layout-skin="sidebarLayoutSkin">\
+            </aui-sidebar-submenu>\
+          </el-submenu>\
+          <el-menu-item v-else :index="menu.id + \'\'" @click="tabAddHandle(menu)">\
+            <svg class="aui-sidebar__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
+            <span>{{ menu.title }}</span>\
+          </el-menu-item>',
+        props: {
+          menu: {
+            type: Object,
+            required: true
+          }
+        },
+        computed: {
+          sidebarLayoutSkin: function () {
+            return vm.sidebarLayoutSkin;
+          }
+        },
+        methods: {
+          tabAddHandle (menu) {
+            vm.$emit('tabAddHandle', menu);
+          }
+        }
+      }); 
+    };
+  })();
+</script>
 </body>
 </html>

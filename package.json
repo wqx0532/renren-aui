@@ -5,8 +5,9 @@
   "scripts": {
     "serve": "gulp serve",
     "build": "gulp build",
+    "et": "node_modules/.bin/et",
     "et:init": "node_modules/.bin/et -i",
-    "et": "node_modules/.bin/et"
+    "et:list": "gulp element-theme"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
