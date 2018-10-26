@@ -1,0 +1,17 @@
+<aside class="aui-aside" :class="'aui-aside--' + asideSkin">
+  <div class="aui-aside__inner">
+    <el-menu
+      :default-active="asideMenuActiveName"
+      :collapse="asideFold"
+      :unique-opened="true"
+      :collapse-transition="false"
+      class="aui-aside__menu">
+      <aui-aside-submenu
+        v-for="menu in asideMenuList"
+        :key="menu.id"
+        :menu="menu"
+        :aside-skin="asideSkin">
+      </aui-aside-submenu>
+    </el-menu>
+  </div>
+</aside>

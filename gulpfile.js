@@ -107,7 +107,7 @@ gulp.task('scripts', () => {
  * 监听
  */
 gulp.task('watch', () => {
-  gulp.watch(['./src/pages/**/*.html', './src/templates/**/*.tmpl'], ['pages'])
+  gulp.watch(['./src/pages/**/*.html', './src/templates/**/*.html'], ['pages'])
   gulp.watch(['./src/scss/**/*.{scss,css}'], ['styles', 'skins'])
   gulp.watch(['./src/img/**/*.{gif,jpeg,jpg,png}'], ['images'])
   gulp.watch(['./src/js/**/*.js'], ['scripts'])
@@ -137,9 +137,9 @@ gulp.task('build', () => {
 })
 
 /**
- * element主题
+ * 创建element主题
  */
-gulp.task('element-theme', () => {
+gulp.task('create-element-theme', () => {
   var themeList        = require('./src/skins.json').filter(item => !item.hasBuild)
   var styleFileDir     = './src/scss'
   var styleFileDirTemp = `${styleFileDir}-temp`
@@ -199,4 +199,22 @@ gulp.task('element-theme', () => {
       console.log('\n')
     }
   }
+})
+
+/**
+ * 创建aui皮肤
+ */
+gulp.task('create-aui-skins', () => {
+  var themeList        = require('./src/skins.json').filter(item => !item.hasBuild)
+  var styleFileDir     = './src/scss'
+  var styleFileDirTemp = `${styleFileDir}-temp`
+  return gulp.src([`${styleFileDirTemp}/aui.scss`])
+    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.autoprefixer({
+      browsers: etOptions.browsers,
+      cascade: false
+    }))
+    .pipe($.cleanCss())
+    .pipe($.rename('aui.css'))
+    .pipe(gulp.dest(`${themeFileDir}/${theme.name}`))
 })

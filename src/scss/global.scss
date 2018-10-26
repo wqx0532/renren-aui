@@ -1,0 +1,84 @@
+:root {
+  @each $key, $value in $skins {
+    --#{$key}: #{$value};
+  }
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: $font--family-base;
+  font-size: $font--size-base;
+  line-height: $font--line-height-base;
+  text-align: left;
+  color: $color--text-primary;
+  background-color: #fff;
+}
+a {
+  color: $link--color;
+  text-decoration: none;
+  &:hover {
+    color: $link--hover-color;
+    text-decoration: none;
+  }
+}
+
+
+/* Common
+------------------------------ */
+.icon-svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  overflow: hidden;
+  vertical-align: middle;
+}
+// 卡片
+.aui-card--fill .el-card__header {
+  height: $content--card-header-height;
+  line-height: $content--card-header-height - 36px;
+}
+.aui-card__title {
+  font-size: 16px;
+}
+// 表单
+.aui-form__label-icon {
+  display: inline-block;
+  margin: 0 3px;
+  vertical-align: middle;
+  font-size: 18px;
+  color: $color--text-secondary;
+}
+// 按钮
+.aui-button--dashed {
+  border-style: dashed;
+  &:hover {
+    background-color: transparent;
+  }
+  &-add {
+    > span > *[class*="el-icon-"],
+    > span > *[class*="icon"] {
+      vertical-align: middle;
+      font-size: 18px;
+      margin-right: 5px;
+    }
+  }
+}
+// quill富文本编辑器
+.ql-toolbar {
+  line-height: 20px;
+  &.ql-snow {
+    border-color: $border--color-base;
+  }
+  .ql-formats {
+    margin: 0 5px;
+  }
+}
+.ql-container {
+  height: 150px;
+  &.ql-snow {
+    border-color: $border--color-base;
+  }
+}

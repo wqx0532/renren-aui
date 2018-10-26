@@ -1,0 +1,134 @@
+/* Skins
+-------------------------- */
+$skin--blue     : #3E8EF7;
+$skin--brown    : #997B71;
+$skin--cyan     : #0BB2D4;
+$skin--gray     : #757575;
+$skin--green    : #11C26D;
+$skin--indigo   : #667AFA;
+$skin--orange   : #EB6709;
+$skin--pink     : #F74584;
+$skin--purple   : #9463F7;
+$skin--red      : #FF4C52;
+$skin--turquoise: #17B3A3;
+$skin--yellow   : #FCB900;
+$skins: (
+  'blue'     : $skin--blue,
+  'brown'    : $skin--brown,
+  'cyan'     : $skin--cyan,
+  'gray'     : $skin--gray,
+  'green'    : $skin--green,
+  'indigo'   : $skin--indigo,
+  'orange'   : $skin--orange,
+  'pink'     : $skin--pink,
+  'purple'   : $skin--purple,
+  'red'      : $skin--red,
+  'turquoise': $skin--turquoise,
+  'yellow'   : $skin--yellow
+);
+
+
+/* Element-ui theme color
+-------------------------- */
+$--color-primary: $skin--blue !default;
+
+
+/* Colors
+-------------------------- */
+$color--white: #fff;
+$color--black: #000;
+$color--primary        : $--color-primary;
+$color--primary-light-1: mix($color--white, $color--primary, 10%);
+$color--primary-light-2: mix($color--white, $color--primary, 20%);
+$color--primary-light-3: mix($color--white, $color--primary, 30%);
+$color--primary-light-4: mix($color--white, $color--primary, 40%);
+$color--primary-light-5: mix($color--white, $color--primary, 50%);
+$color--primary-light-6: mix($color--white, $color--primary, 60%);
+$color--primary-light-7: mix($color--white, $color--primary, 70%);
+$color--primary-light-8: mix($color--white, $color--primary, 80%);
+$color--primary-light-9: mix($color--white, $color--primary, 90%);
+$color--text-primary    : #303133;
+$color--text-regular    : #606266;
+$color--text-secondary  : #909399;
+$color--text-placeholder: #c0c4cc;
+
+/* Link
+-------------------------- */
+$link--color      : $color--primary-light-2;
+$link--hover-color: $color--primary;
+
+
+/* Border
+-------------------------- */
+$border--color-base       : #dcdfe6;
+$border--color-light      : #e4e7ed;
+$border--color-lighter    : #ebeef5;
+$border--color-extra-light: #f2f6fc;
+$border--hover-color: $color--text-placeholder;
+$border--radius-sm  : 2px;
+$border--radius-base: 4px;
+
+
+/* Background
+-------------------------- */
+$bg--color-base: #f5f7fa;
+
+
+/* Font
+------------------------------ */
+$font--family-base: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+$font--size-xs  : 12px;
+$font--size-sm  : 13px;
+$font--size-base: 14px;
+$font--size-lg  : 18px;
+$font--size-xl  : 22px;
+$font--weight-base : 500;
+$font--line-height-base: 1.15;
+
+/* Header
+------------------------------ */
+$header--zindex: 1030;
+$header--height: 50px;
+
+
+/* Aside
+------------------------------ */
+$aside--zindex: 1020;
+$aside--width: 230px;
+$aside--width-fold: 64px;
+$aside--background-color-dark: #263238;
+$aside--text-color-dark: #8a979e;
+$aside--menu-item-height: 48px;
+
+
+/* Sidebar
+------------------------------ */
+$sidebar--width: 230px;
+$sidebar--width-fold: 64px;
+$sidebar--background-color-dark: #263238;
+$sidebar--text-color-dark: #8a979e;
+$sidebar--menu-item-height: 48px;
+
+
+/* Main
+------------------------------ */
+$main--padding: 15px;
+$main--background-color: #f1f4f5;
+$main--card-header-height: 60px;
+$main--tabs-header-height: 38px;
+// Main, 填充整屏高度(非tabs状态) = 整屏高度 - 导航条高度 - aui-main上下内边距高度
+$main--fill-height: calc(100vh - #{$header--height} - #{$main--padding * 2});
+// Main, 填充整屏高度(是tabs状态) = 整屏高度 - 导航条高度 - tabs组件header高度 - tabs组件main上下内边距高度
+$main--fill-height-tabs: calc(100vh - #{$header--height} - #{$main--tabs-header-height} - #{$main--padding * 2});
+
+
+/* Content
+------------------------------ */
+$content--padding: 15px;
+$content--background-color: #f1f4f5;
+$content--card-header-height: 60px;
+$content--tabs-header-height: 38px;
+// Content, 填充整屏高度(非tabs状态) = 整屏高度 - 导航条高度 - aui-content上下内边距高度
+$content--fill-height: calc(100vh - #{$header--height} - #{$content--padding * 2});
+// Content, 填充整屏高度(是tabs状态) = 整屏高度 - 导航条高度 - tabs组件header高度 - tabs组件content上下内边距高度
+$content--fill-height-tabs: calc(100vh - #{$header--height} - #{$content--tabs-header-height} - #{$content--padding * 2});

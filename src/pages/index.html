@@ -1,47 +1,45 @@
-<include src="../templates/html-header.tmpl" path=".."></include>
+<include src="../templates/html-header.html" path=".."></include>
 <body>
-  <div
-    class="aui-wrapper"
-    :class="{ 'aui-sidebar--fold': sidebarFold }"
-    v-loading.fullscreen.lock="loading"
-    element-loading-text="拼命加载中">
+  <div class="aui-wrapper" :class="{ 'aui-aside--fold': asideFold }" v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
     <template v-if="!loading">
-      <!-- aui-navbar -->
-      <include src="../templates/layout-navbar.tmpl"></include>
-
-      <!-- aui-sidebar -->
-      <include src="../templates/layout-sidebar.tmpl"></include>
-
-      <!-- aui-content -->
-      <div class="aui-content__wrapper">
-        <include src="../templates/layout-content.tmpl"></include>
-      </div>
+      <!-- aui-header -->
+      <include src="../templates/layout-header.html"></include>
+      <!-- aui-aside -->
+      <include src="../templates/layout-aside.html"></include>
+      <!-- aui-main -->
+      <main class="aui-main" :class="{ 'aui-main--tabs': isTab }">
+        <el-row>
+          <el-button>默认按钮</el-button>
+          <el-button type="primary">主要按钮</el-button>
+          <el-button type="success">成功按钮</el-button>
+          <el-button type="info">信息按钮</el-button>
+          <el-button type="warning">警告按钮</el-button>
+          <el-button type="danger">危险按钮</el-button>
+        </el-row>
+      </main>
+      <!-- aui-footer -->
+      <include src="../templates/layout-footer.html"></include>
+      <!-- aui-skin-tools -->
+      <include src="../templates/layout-skin-tools.html"></include>
     </template>
   </div>
-  <include src="../templates/html-scripts.tmpl" path=".."></include>
+  <include src="../templates/html-scripts.html" path=".."></include>
   <script>
   (function () {
     var vm = window.vm = new Vue({
       el: '.aui-wrapper',
       data: function () {
-        var validateUpdatePasswordConfirmPassword = function (rule, value, callback) {
-          if (vm.updatePasswordDataForm.newPassword !== value) {
-            callback(new Error('确认密码与新密码不一致'));
-          } else {
-            callback();
-          }
-        }
         return {
           loading: true,
-          // 导航条, 布局风格, defalut(白色) / colorful(鲜艳)
-          navbarLayoutType: 'defalut',
-          // 侧边栏, 布局皮肤, default(白色) / dark(黑色)
-          sidebarLayoutSkin: 'dark',
-          // 侧边栏, 折叠状态
-          sidebarFold: false,
-          // 侧边栏, 菜单
-          sidebarMenuList: [],
-          sidebarMenuActiveName: '',
+          // 头部, 布局皮肤, white(白色) / colorful(鲜艳)
+          headerSkin: 'white',
+          // 侧边, 布局皮肤, white(白色) / dark(黑色)
+          asideSkin: 'white',
+          // 侧边, 折叠状态
+          asideFold: false,
+          // 侧边, 菜单
+          asideMenuList: [],
+          asideMenuActiveName: '',
           // 内容是否通过tab展示
           isTab: true,
           // 内容标签页
@@ -70,16 +68,21 @@
               { required: true, message: '必填项不能为空', trigger: 'blur' }
             ],
             confirmPassword: [
-              { required: true, message: '必填项不能为空', trigger: 'blur' },
-              { validator: validateUpdatePasswordConfirmPassword, trigger: 'blur' }
+              { required: true, message: '必填项不能为空', trigger: 'blur' }
             ]
-          }
+          },
+          themeToolsIsOpen: false,
+          themeList: [],
+          themeColor: 'turquoise'
         }
       },
       beforeCreate () {
         vm = this;
       },
       created () {
+        axios.get('../skins.json').then(function (res) {
+          vm.themeList = res.data;
+        });
         axios.all([
           vm.getUserInfo(),
           vm.getMenuList()
@@ -103,15 +106,39 @@
       },
       mounted () {
         // 窗口resize实现媒体查询
-        vm.sidebarFold = document.documentElement['clientWidth'] <= 992 || false;
+        vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
         window.addEventListener('resize', _.debounce(function () {
-          vm.sidebarFold = document.documentElement['clientWidth'] <= 992 || false;
+          vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
         }, 150));
       },
       methods: {
+        themeColorChangeHandle (val) {
+          var styleList = [
+            {
+              id: 'J_elementTheme',
+              url: '../element-theme/' + val + '/index.css?t=' + new Date().getTime()
+            },
+            {
+              id: 'J_auiTheme',
+              url: '../element-theme/' + val + '/aui.css?t=' + new Date().getTime()
+            }
+          ]
+          for (var i = 0; i < styleList.length; i++) {
+            var el = document.querySelector('#' + styleList[i].id)
+            if (el) {
+              el.href = styleList[i].url
+              continue
+            }
+            el = document.createElement('link')
+            el.id = styleList[i].id
+            el.href = styleList[i].url
+            el.rel = 'stylesheet'
+            document.querySelector('head').appendChild(el)
+          }
+        },
         // 获取当前管理员信息
         getUserInfo: function () {
-          return axios.get('../aui/json/sys-user-info.json').then(function (res) {
+          return axios.get('../mock/sys-user-info.json').then(function (res) {
             if (res.data && res.data.code === 0) {
               vm.user.id = res.data.user.userId;
               vm.user.name = res.data.user.username;
@@ -120,7 +147,7 @@
         },
         // 获取菜单列表
         getMenuList: function () {
-          return axios.get('../aui/json/sys-menu-nav.json').then(function (res) {
+          return axios.get('../mock/sys-menu-nav.json').then(function (res) {
             if (res.data && res.data.code === 0) {
               vm.sidebarMenuList = res.data.data;
             }
@@ -256,25 +283,25 @@
     * 注册组件, 侧边栏子菜单
     */
     function fnRegistrationAuiSidebarSubmenu () {
-      Vue.component('aui-sidebar-submenu', {
+      Vue.component('aui-aside-submenu', {
         template: '\
           <el-submenu\
             v-if="menu.children && menu.children.length >= 1"\
             :index="menu.id + \'\'"\
-            :popper-class="\'aui-sidebar--\' + sidebarLayoutSkin + \'-popper\'">\
+            :popper-class="\'aui-aside--\' + asideSkin + \'-popper\'">\
             <template slot="title">\
-              <svg class="aui-sidebar__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
+              <svg class="aui-aside__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
               <span>{{ menu.title }}</span>\
             </template>\
-            <aui-sidebar-submenu\
+            <aui-aside-submenu\
               v-for="item in menu.children"\
               :key="item.id"\
               :menu="item"\
-              :sidebar-layout-skin="sidebarLayoutSkin">\
-            </aui-sidebar-submenu>\
+              :aside-skin="asideSkin">\
+            </aui-aside-submenu>\
           </el-submenu>\
           <el-menu-item v-else :index="menu.id + \'\'" @click="tabAddHandle(menu)">\
-            <svg class="aui-sidebar__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
+            <svg class="aui-aside__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
             <span>{{ menu.title }}</span>\
           </el-menu-item>',
         props: {
@@ -284,8 +311,8 @@
           }
         },
         computed: {
-          sidebarLayoutSkin: function () {
-            return vm.sidebarLayoutSkin;
+          asideLayoutSkin: function () {
+            return vm.asideLayoutSkin;
           }
         },
         methods: {

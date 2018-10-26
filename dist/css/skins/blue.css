@@ -1,0 +1,45 @@
+/* Skins
+-------------------------- */
+/* Element-ui theme color
+-------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
+/* Border
+-------------------------- */
+/* Background
+-------------------------- */
+/* Font
+------------------------------ */
+/* Header
+------------------------------ */
+/* Aside
+------------------------------ */
+/* Sidebar
+------------------------------ */
+/* Main
+------------------------------ */
+/* Content
+------------------------------ */
+/* Header
+------------------------------ */
+.aui-header__hd {
+  background-color: #3E8EF7; }
+
+.aui-header .aui-brand {
+  color: #fff; }
+
+.aui-header .aui-brand--lg,
+.aui-header .aui-brand--sm {
+  color: #fff; }
+  .aui-header .aui-brand--lg:focus, .aui-header .aui-brand--lg:hover,
+  .aui-header .aui-brand--sm:focus,
+  .aui-header .aui-brand--sm:hover {
+    color: #fff; }
+
+.aui-header--colorful {
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+  .aui-header--colorful .aui-header__bd {
+    background-color: #3E8EF7; }

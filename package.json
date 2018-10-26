@@ -7,7 +7,7 @@
     "build": "gulp build",
     "et": "node_modules/.bin/et",
     "et:init": "node_modules/.bin/et -i",
-    "et:list": "gulp element-theme"
+    "et:list": "gulp create-element-theme"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -32,7 +32,7 @@
     "gulp-util": "^3.0.8"
   },
   "element-theme": {
-    "config": "./src/scss/_variables-element.scss",
+    "config": "./src/scss/variables-element.scss",
     "out": "./src/element-theme/default",
     "minimize": true,
     "browsers": [

@@ -1,0 +1,26 @@
+@import "../variables";
+
+/* Header
+------------------------------ */
+.aui-header {
+  &__hd {
+    background-color: $skin--blue;
+  }
+  .aui-brand {
+    color: #fff;
+  }
+  .aui-brand--lg,
+  .aui-brand--sm {
+    color: #fff;
+    &:focus,
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.aui-header--colorful {
+  box-shadow: none;
+  .aui-header__bd {
+    background-color: $skin--blue;
+  }
+}

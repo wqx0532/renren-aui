@@ -1,0 +1,245 @@
+{
+  "msg": "success",
+  "code": 0,
+  "data": [
+    {
+      "id": 1000,
+      "title": "dashboard",
+      "icon": "icon-dashboard",
+      "url": null,
+      "children": [
+        {
+          "id": 1001,
+          "title": "分析页",
+          "icon": "",
+          "url": "./modules/dashboard/analysis.html",
+          "children": null
+        },
+        {
+          "id": 1002,
+          "title": "监控页",
+          "icon": "",
+          "url": "./modules/dashboard/monitor.html",
+          "children": null
+        },
+        {
+          "id": 1003,
+          "title": "工作台",
+          "icon": "",
+          "url": "./modules/dashboard/workplace.html",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 7000,
+      "title": "基础页面",
+      "icon": "icon-jichu",
+      "url": null,
+      "children": [
+        {
+          "id": 7001,
+          "title": "登录",
+          "icon": "",
+          "url": "./pages/login.html",
+          "children": null
+        },
+        {
+          "id": 7002,
+          "title": "登录-v2",
+          "icon": "",
+          "url": "./pages/login-v2.html",
+          "children": null
+        },
+        {
+          "id": 7003,
+          "title": "注册",
+          "icon": "",
+          "url": "./pages/register.html",
+          "children": null
+        },
+        {
+          "id": 7004,
+          "title": "注册-v2",
+          "icon": "",
+          "url": "./pages/register-v2.html",
+          "children": null
+        },
+        {
+          "id": 7005,
+          "title": "找回密码",
+          "icon": "",
+          "url": "./pages/forget.html",
+          "children": null
+        },
+        {
+          "id": 7006,
+          "title": "找回密码-v2",
+          "icon": "",
+          "url": "./pages/forget-v2.html",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 2000,
+      "title": "表单页",
+      "icon": "icon-biaodan",
+      "url": null,
+      "children": [
+        {
+          "id": 2001,
+          "title": "基础表单",
+          "icon": "",
+          "url": "./modules/form/basic.html",
+          "children": null
+        },
+        {
+          "id": 2002,
+          "title": "分布表单",
+          "icon": "",
+          "url": "./modules/form/step.html",
+          "children": null
+        },
+        {
+          "id": 2003,
+          "title": "高级表单",
+          "icon": "",
+          "url": "./modules/form/advanced.html",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 3000,
+      "title": "列表页",
+      "icon": "icon-liebiao",
+      "url": null,
+      "children": [
+        {
+          "id": 3001,
+          "title": "查询表格",
+          "icon": "",
+          "url": "./modules/list/table.html",
+          "children": null
+        },
+        {
+          "id": 3002,
+          "title": "标准列表",
+          "icon": "",
+          "url": "./modules/list/basic.html",
+          "children": null
+        },
+        {
+          "id": 3003,
+          "title": "卡片列表",
+          "icon": "",
+          "url": "./modules/list/card.html",
+          "children": null
+        },
+        {
+          "id": 3004,
+          "title": "搜索列表",
+          "icon": "",
+          "url": "",
+          "children": [
+            {
+              "id": 3005,
+              "title": "搜索列表（文章）",
+              "icon": "",
+              "url": "./modules/list/search-articles.html",
+              "children": null
+            },
+            {
+              "id": 3006,
+              "title": "搜索列表（项目）",
+              "icon": "",
+              "url": "./modules/list/search-projects.html",
+              "children": null
+            },
+            {
+              "id": 3007,
+              "title": "搜索列表（应用）",
+              "icon": "",
+              "url": "./modules/list/search-applications.html",
+              "children": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4000,
+      "title": "详情页面",
+      "icon": "icon-xiangqing",
+      "url": null,
+      "children": [
+        {
+          "id": 4001,
+          "title": "基础详情页",
+          "icon": "",
+          "url": "./modules/profile/basic.html",
+          "children": null
+        },
+        {
+          "id": 4002,
+          "title": "高级详情页",
+          "icon": "",
+          "url": "./modules/profile/advanced.html",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 5000,
+      "title": "结果页",
+      "icon": "icon-chenggong",
+      "url": null,
+      "children": [
+        {
+          "id": 5001,
+          "title": "成功",
+          "icon": "",
+          "url": "./modules/result/success.html",
+          "children": null
+        },
+        {
+          "id": 5002,
+          "title": "失败",
+          "icon": "",
+          "url": "./modules/result/fail.html",
+          "children": null
+        }
+      ]
+    },
+    {
+      "id": 6000,
+      "title": "异常页面",
+      "icon": "icon-yichang",
+      "url": null,
+      "children": [
+        {
+          "id": 6001,
+          "title": "403",
+          "icon": "",
+          "url": "./pages/error/403.html",
+          "children": null
+        },
+        {
+          "id": 6002,
+          "title": "404",
+          "icon": "",
+          "url": "./pages/error/404.html",
+          "children": null
+        },
+        {
+          "id": 6003,
+          "title": "500",
+          "icon": "",
+          "url": "./pages/error/500.html",
+          "children": null
+        }
+      ]
+    }
+  ]
+}

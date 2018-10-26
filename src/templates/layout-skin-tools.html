@@ -1,0 +1,21 @@
+<div class="aui-theme-tools" :class="{ 'aui-theme-tools--open': themeToolsIsOpen }">
+  <div class="aui-theme-tools__toggle" @click="themeToolsIsOpen = !themeToolsIsOpen">
+    <svg class="icon-svg" aria-hidden="true"><use xlink:href="#icon-setting"></use></svg>
+  </div>
+  <div class="aui-theme-tools__content">
+    <div class="aui-theme-tools__item">
+      <h3>Header</h3>
+      <el-checkbox v-model="headerSkin" true-label="colorful">colorful 鲜艳</el-checkbox>
+    </div>
+    <div class="aui-theme-tools__item">
+      <h3>Aside</h3>
+      <el-checkbox v-model="asideSkin" true-label="dark">dark 黑色</el-checkbox>
+    </div>
+    <div class="aui-theme-tools__item">
+      <h3>Theme</h3>
+      <el-radio-group v-model="themeColor" @change="themeColorChangeHandle">
+        <el-radio v-for="item in themeList" :key="item.name" :label="item.name">{{ item.name }} {{ item.desc }}</el-radio>
+      </el-radio-group>
+    </div>
+  </div>
+</div>
