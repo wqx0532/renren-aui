@@ -297,14 +297,15 @@ $block: '.aui-aside';
       background-color: transparent;
     }
   }
-  &__menu.el-menu > .el-menu-item.is-active,
-  &__menu.el-menu > .el-submenu.is-active,
-  &__menu.el-menu > .el-submenu.is-active .el-menu,
-  &__menu.el-menu > .el-submenu.is-opened,
-  &__menu.el-menu > .el-submenu.is-opened .el-menu {
+  &__menu.el-menu .el-menu-item.is-active,
+  &__menu.el-menu .el-submenu.is-active,
+  &__menu.el-menu .el-submenu.is-active .el-menu,
+  &__menu.el-menu .el-submenu.is-opened,
+  &__menu.el-menu .el-submenu.is-opened .el-menu {
     background-color: $color--primary-light-9;
   }
-  &__menu.el-menu > .el-submenu.is-active > .el-submenu__title,
+  &__menu.el-menu .el-menu-item.is-active,
+  &__menu.el-menu .el-submenu.is-active > .el-submenu__title,
   &__menu.el-menu > .el-submenu.is-opened > .el-submenu__title {
     color: $color--primary;
   }
@@ -344,14 +345,15 @@ $block: '.aui-aside';
       color: $color--white;
     }
   }
-  #{$block}__menu.el-menu > .el-menu-item.is-active,
-  #{$block}__menu.el-menu > .el-submenu.is-active,
-  #{$block}__menu.el-menu > .el-submenu.is-active .el-menu,
-  #{$block}__menu.el-menu > .el-submenu.is-opened,
-  #{$block}__menu.el-menu > .el-submenu.is-opened .el-menu {
+  #{$block}__menu.el-menu .el-menu-item.is-active,
+  #{$block}__menu.el-menu .el-submenu.is-active,
+  #{$block}__menu.el-menu .el-submenu.is-active .el-menu,
+  #{$block}__menu.el-menu .el-submenu.is-opened,
+  #{$block}__menu.el-menu .el-submenu.is-opened .el-menu {
     background-color: mix($color--white, $aside--background-color-dark, 5%);
   }
-  #{$block}__menu.el-menu > .el-submenu.is-active > .el-submenu__title,
+  &__menu.el-menu .el-menu-item.is-active,
+  #{$block}__menu.el-menu .el-submenu.is-active > .el-submenu__title,
   #{$block}__menu.el-menu > .el-submenu.is-opened > .el-submenu__title {
     color: $color--white;
   }

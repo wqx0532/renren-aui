@@ -7,8 +7,7 @@
     "build": "gulp build",
     "et": "node_modules/.bin/et",
     "et:init": "node_modules/.bin/et -i",
-    "et:list": "gulp create-element-theme",
-    "skin:list": "gulp create-aui-skin"
+    "et:list": "gulp create-element-theme"
   },
   "dependencies": {
     "babel-core": "^6.26.3",

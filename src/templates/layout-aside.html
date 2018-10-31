@@ -6,6 +6,10 @@
       :unique-opened="true"
       :collapse-transition="false"
       class="aui-aside__menu">
+      <el-menu-item index="home">
+        <svg class="aui-aside__menu-icon icon-svg" aria-hidden="true"><use xlink:href="#icon-home"></use></svg>
+        <span slot="title">首页</span>
+      </el-menu-item>
       <aui-aside-submenu
         v-for="menu in asideMenuList"
         :key="menu.id"

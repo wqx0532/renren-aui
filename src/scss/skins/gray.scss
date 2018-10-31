@@ -1,0 +1,16 @@
+@import "../variables";
+
+$--color-primary: $skin--gray;
+
+@import "../aui";
+
+/* Aside
+------------------------------ */
+$block: '.aui-aside';
+#{$block} {
+  &__menu.el-menu .el-menu-item.is-active,
+  &__menu.el-menu .el-submenu.is-active > .el-submenu__title,
+  &__menu.el-menu > .el-submenu.is-opened > .el-submenu__title {
+    color: $color--black;
+  }
+}

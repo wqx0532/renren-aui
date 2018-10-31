@@ -1,4 +1,28 @@
 @charset "UTF-8";
+/* Skins
+-------------------------- */
+/* Element-ui theme color and Aui skin color
+-------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
+/* Border
+-------------------------- */
+/* Background
+-------------------------- */
+/* Font
+------------------------------ */
+/* Header
+------------------------------ */
+/* Aside
+------------------------------ */
+/* Main
+------------------------------ */
+/* Footer
+------------------------------ */
+/* Aside control
+------------------------------ */
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -302,6 +326,8 @@ template {
 [hidden] {
   display: none; }
 
+/* Skins
+-------------------------- */
 /* Element-ui theme color and Aui skin color
 -------------------------- */
 /* Colors
@@ -848,13 +874,14 @@ a {
     .aui-aside__menu.el-menu .el-submenu .el-submenu__title:hover {
       color: #667AFA;
       background-color: transparent; }
-  .aui-aside__menu.el-menu > .el-menu-item.is-active,
-  .aui-aside__menu.el-menu > .el-submenu.is-active,
-  .aui-aside__menu.el-menu > .el-submenu.is-active .el-menu,
-  .aui-aside__menu.el-menu > .el-submenu.is-opened,
-  .aui-aside__menu.el-menu > .el-submenu.is-opened .el-menu {
+  .aui-aside__menu.el-menu .el-menu-item.is-active,
+  .aui-aside__menu.el-menu .el-submenu.is-active,
+  .aui-aside__menu.el-menu .el-submenu.is-active .el-menu,
+  .aui-aside__menu.el-menu .el-submenu.is-opened,
+  .aui-aside__menu.el-menu .el-submenu.is-opened .el-menu {
     background-color: #f0f2ff; }
-  .aui-aside__menu.el-menu > .el-submenu.is-active > .el-submenu__title,
+  .aui-aside__menu.el-menu .el-menu-item.is-active,
+  .aui-aside__menu.el-menu .el-submenu.is-active > .el-submenu__title,
   .aui-aside__menu.el-menu > .el-submenu.is-opened > .el-submenu__title {
     color: #667AFA; }
   .aui-aside__menu.el-menu .el-menu-item i,
@@ -889,13 +916,14 @@ a {
     .aui-aside--dark .aui-aside__menu.el-menu .el-submenu .el-submenu__title:focus,
     .aui-aside--dark .aui-aside__menu.el-menu .el-submenu .el-submenu__title:hover {
       color: #fff; }
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-menu-item.is-active,
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-active,
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-active .el-menu,
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-opened,
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-opened .el-menu {
+  .aui-aside--dark .aui-aside__menu.el-menu .el-menu-item.is-active,
+  .aui-aside--dark .aui-aside__menu.el-menu .el-submenu.is-active,
+  .aui-aside--dark .aui-aside__menu.el-menu .el-submenu.is-active .el-menu,
+  .aui-aside--dark .aui-aside__menu.el-menu .el-submenu.is-opened,
+  .aui-aside--dark .aui-aside__menu.el-menu .el-submenu.is-opened .el-menu {
     background-color: #313c42; }
-  .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-active > .el-submenu__title,
+  .aui-aside--dark__menu.el-menu .el-menu-item.is-active,
+  .aui-aside--dark .aui-aside__menu.el-menu .el-submenu.is-active > .el-submenu__title,
   .aui-aside--dark .aui-aside__menu.el-menu > .el-submenu.is-opened > .el-submenu__title {
     color: #fff; }
 
