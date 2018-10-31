@@ -9,7 +9,7 @@ body {
   line-height: $font--line-height-base;
   text-align: left;
   color: $color--text-primary;
-  background-color: #fff;
+  background-color: $color--white;
 }
 a {
   color: $link--color;

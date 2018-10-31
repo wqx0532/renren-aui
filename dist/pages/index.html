@@ -6,8 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>renren-aui</title>
   <link rel="stylesheet" href="../element-theme/blue/index.css">
-  <link rel="stylesheet" href="../css/aui.min.css">
-  <!-- <link rel="stylesheet" href="../css/skins/blue.min.css"> -->
+  <link rel="stylesheet" href="../css/aui-blue.min.css">
 </head>
 <body>
   <div class="aui-wrapper"
@@ -24,8 +23,6 @@
         <div class="aui-header__hd">
           <a class="aui-brand aui-brand--lg" href="javascript:;">renren-aui</a>
           <a class="aui-brand aui-brand--sm" href="javascript:;">aui</a>
-          <!-- <h1 class="aui-brand">
-          </h1> -->
         </div>
         <div class="aui-header__bd">
           <el-menu class="aui-header__menu mr-auto" mode="horizontal">
@@ -267,7 +264,7 @@
             },
             {
               id: 'J_auiSKin',
-              url: '../css/skins/' + val + '.min.css?t=' + new Date().getTime()
+              url: '../css/aui-' + val + '.min.css?t=' + new Date().getTime()
             }
           ]
           for (var i = 0; i < styleList.length; i++) {

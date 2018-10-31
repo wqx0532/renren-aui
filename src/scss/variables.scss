@@ -1,36 +1,6 @@
-/* Skins
+/* Element-ui theme color and Aui skin color
 -------------------------- */
-$skin--blue     : #3E8EF7;
-$skin--brown    : #997B71;
-$skin--cyan     : #0BB2D4;
-$skin--gray     : #757575;
-$skin--green    : #11C26D;
-$skin--indigo   : #667AFA;
-$skin--orange   : #EB6709;
-$skin--pink     : #F74584;
-$skin--purple   : #9463F7;
-$skin--red      : #FF4C52;
-$skin--turquoise: #17B3A3;
-$skin--yellow   : #FCB900;
-$skins: (
-  'blue'     : $skin--blue,
-  'brown'    : $skin--brown,
-  'cyan'     : $skin--cyan,
-  'gray'     : $skin--gray,
-  'green'    : $skin--green,
-  'indigo'   : $skin--indigo,
-  'orange'   : $skin--orange,
-  'pink'     : $skin--pink,
-  'purple'   : $skin--purple,
-  'red'      : $skin--red,
-  'turquoise': $skin--turquoise,
-  'yellow'   : $skin--yellow
-);
-
-
-/* Element-ui theme color
--------------------------- */
-$--color-primary: $skin--blue !default;
+$--color-primary: #3E8EF7 !default; // Default blue skin color
 
 
 /* Colors
@@ -91,10 +61,7 @@ $font--line-height-base: 1.15;
 ------------------------------ */
 $header--zindex: 1030;
 $header--height: 50px;
-// $header--menu-color-hover: $color--primary;
-// $header--menu-bg-hover: transparent;
 $brand--font-size: $font--size-xl;
-// $header--menu-bg-hover-colorful: mix($color--black, $color--primary, 15%);
 
 
 /* Aside
@@ -109,19 +76,16 @@ $aside--background-color-dark: #263238;
 
 /* Main
 ------------------------------ */
-$main--padding: 15px;
+$main-padding-x: 15px;
+$main-padding-y: 15px;
 $main--background-color: #f1f4f5;
-$main--card-header-height: 60px;
-$main--tabs-header-height: 38px;
-// Main, 填充整屏高度(非tabs状态) = 整屏高度 - 导航条高度 - aui-main上下内边距高度
-$main--fill-height: calc(100vh - #{$header--height} - #{$main--padding * 2});
-// Main, 填充整屏高度(是tabs状态) = 整屏高度 - 导航条高度 - tabs组件header高度 - tabs组件main上下内边距高度
-$main--fill-height-tabs: calc(100vh - #{$header--height} - #{$main--tabs-header-height} - #{$main--padding * 2});
 
 
 /* Footer
 ------------------------------ */
 $footer-height: 50px;
+$footer-padding-x: 15px;
+$footer-padding-y: 10px;
 
 
 /* Aside control
