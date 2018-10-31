@@ -1,8 +1,3 @@
-:root {
-  @each $key, $value in $skins {
-    --#{$key}: #{$value};
-  }
-}
 *,
 *:before,
 *:after {
@@ -32,53 +27,30 @@ a {
   width: 1em;
   height: 1em;
   fill: currentColor;
+  vertical-align: middle;
   overflow: hidden;
-  vertical-align: middle;
 }
-// 卡片
-.aui-card--fill .el-card__header {
-  height: $content--card-header-height;
-  line-height: $content--card-header-height - 36px;
-}
-.aui-card__title {
-  font-size: 16px;
-}
-// 表单
-.aui-form__label-icon {
-  display: inline-block;
-  margin: 0 3px;
-  vertical-align: middle;
-  font-size: 18px;
-  color: $color--text-secondary;
-}
-// 按钮
-.aui-button--dashed {
-  border-style: dashed;
-  &:hover {
-    background-color: transparent;
+
+
+/* Reset element-ui
+------------------------------ */
+.aui-wrapper {
+  .el-card + .el-card {
+    margin-top: 15px;
   }
-  &-add {
-    > span > *[class*="el-icon-"],
-    > span > *[class*="icon"] {
-      vertical-align: middle;
-      font-size: 18px;
-      margin-right: 5px;
-    }
+  .el-input__prefix .el-input__icon {
+    display: inline-block;
+    vertical-align: middle;
   }
-}
-// quill富文本编辑器
-.ql-toolbar {
-  line-height: 20px;
-  &.ql-snow {
-    border-color: $border--color-base;
+  .el-date-editor .el-range-separator {
+    width: 8%;
   }
-  .ql-formats {
-    margin: 0 5px;
+  .el-table th {
+    color: $color--text-primary;
+    background-color: $color--white;
   }
-}
-.ql-container {
-  height: 150px;
-  &.ql-snow {
-    border-color: $border--color-base;
+  .el-pagination {
+    margin-top: 15px;
+    text-align: right;
   }
 }

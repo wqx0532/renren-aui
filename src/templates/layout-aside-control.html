@@ -1,0 +1,27 @@
+<aside class="aui-aside-control" :class="{ 'aui-aside-control--open': asideControlIsOpen }">
+  <div class="aui-aside-control__toggle" @click="asideControlIsOpen = !asideControlIsOpen">
+    <svg class="icon-svg" aria-hidden="true"><use xlink:href="#icon-setting"></use></svg>
+  </div>
+  <div class="aui-aside-control__inner">
+    <div class="aui-aside-control__bd">
+      <dl class="aui-aside-control__setting">
+        <dt>Header</dt>
+        <dd><el-checkbox v-model="headerFixed">Fixed 固定</el-checkbox></dd>
+        <dd><el-checkbox v-model="headerSkin" true-label="colorful">Colorful 鲜艳</el-checkbox></dd>
+      </dl>
+      <dl class="aui-aside-control__setting">
+        <dt>Aside</dt>
+        <dd><el-checkbox v-model="asideFixed">Fixed 固定</el-checkbox></dd>
+        <dd><el-checkbox v-model="asideSkin" true-label="dark">Dark 黑色</el-checkbox></dd>
+      </dl>
+      <dl class="aui-aside-control__setting">
+        <dt>Skins</dt>
+        <dd v-for="item in skinList" :key="item.name">
+          <el-radio v-model="skin" :label="item.name" @change="skinChangeHandle">
+            <span class="t-capitalize">{{ item.name }}</span> {{ item.remark }}
+          </el-radio>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</aside>

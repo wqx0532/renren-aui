@@ -1,3 +1,5 @@
-body {
-  color: red;
-}
+@import "../variables";
+
+$skin-color: $skin--red;
+
+@import "blue";

@@ -52,6 +52,7 @@ $color--text-regular    : #606266;
 $color--text-secondary  : #909399;
 $color--text-placeholder: #c0c4cc;
 
+
 /* Link
 -------------------------- */
 $link--color      : $color--primary-light-2;
@@ -82,13 +83,18 @@ $font--size-sm  : 13px;
 $font--size-base: 14px;
 $font--size-lg  : 18px;
 $font--size-xl  : 22px;
-$font--weight-base : 500;
+$font--weight-base: 500;
 $font--line-height-base: 1.15;
+
 
 /* Header
 ------------------------------ */
 $header--zindex: 1030;
 $header--height: 50px;
+// $header--menu-color-hover: $color--primary;
+// $header--menu-bg-hover: transparent;
+$brand--font-size: $font--size-xl;
+// $header--menu-bg-hover-colorful: mix($color--black, $color--primary, 15%);
 
 
 /* Aside
@@ -96,18 +102,9 @@ $header--height: 50px;
 $aside--zindex: 1020;
 $aside--width: 230px;
 $aside--width-fold: 64px;
-$aside--background-color-dark: #263238;
+$aside--menu-item-height: 40px;
 $aside--text-color-dark: #8a979e;
-$aside--menu-item-height: 48px;
-
-
-/* Sidebar
------------------------------- */
-$sidebar--width: 230px;
-$sidebar--width-fold: 64px;
-$sidebar--background-color-dark: #263238;
-$sidebar--text-color-dark: #8a979e;
-$sidebar--menu-item-height: 48px;
+$aside--background-color-dark: #263238;
 
 
 /* Main
@@ -122,13 +119,12 @@ $main--fill-height: calc(100vh - #{$header--height} - #{$main--padding * 2});
 $main--fill-height-tabs: calc(100vh - #{$header--height} - #{$main--tabs-header-height} - #{$main--padding * 2});
 
 
-/* Content
+/* Footer
 ------------------------------ */
-$content--padding: 15px;
-$content--background-color: #f1f4f5;
-$content--card-header-height: 60px;
-$content--tabs-header-height: 38px;
-// Content, 填充整屏高度(非tabs状态) = 整屏高度 - 导航条高度 - aui-content上下内边距高度
-$content--fill-height: calc(100vh - #{$header--height} - #{$content--padding * 2});
-// Content, 填充整屏高度(是tabs状态) = 整屏高度 - 导航条高度 - tabs组件header高度 - tabs组件content上下内边距高度
-$content--fill-height-tabs: calc(100vh - #{$header--height} - #{$content--tabs-header-height} - #{$content--padding * 2});
+$footer-height: 50px;
+
+
+/* Aside control
+------------------------------ */
+$aside-control--zindex: 1020;
+$aside-control--width: 210px;

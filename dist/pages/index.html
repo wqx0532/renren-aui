@@ -2,47 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>renren-aui</title>
   <link rel="stylesheet" href="../element-theme/blue/index.css">
   <link rel="stylesheet" href="../css/aui.min.css">
-  <link rel="stylesheet" href="../css/skins/blue.min.css">
+  <!-- <link rel="stylesheet" href="../css/skins/blue.min.css"> -->
 </head>
 <body>
-  <div class="aui-wrapper" :class="{ 'aui-aside--fold': asideFold }" v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
+  <div class="aui-wrapper"
+    :class="{
+      'aui-header--fixed': headerFixed,
+      'aui-aside--fixed': asideFixed,
+      'aui-aside--fold': asideFold
+    }"
+    v-loading.fullscreen.lock="loading"
+    element-loading-text="拼命加载中">
     <template v-if="!loading">
       <!-- aui-header -->
       <header class="aui-header" :class="'aui-header--' + headerSkin">
         <div class="aui-header__hd">
-          <h1 class="aui-brand">
-            <a class="aui-brand--lg" href="javascript:;">renren-aui</a>
-            <a class="aui-brand--sm" href="javascript:;">aui</a>
-          </h1>
+          <a class="aui-brand aui-brand--lg" href="javascript:;">renren-aui</a>
+          <a class="aui-brand aui-brand--sm" href="javascript:;">aui</a>
+          <!-- <h1 class="aui-brand">
+          </h1> -->
         </div>
         <div class="aui-header__bd">
           <el-menu class="aui-header__menu mr-auto" mode="horizontal">
             <el-menu-item index="1" @click="asideFold = !asideFold">
-              <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--switch" aria-hidden="true"><use xlink:href="#icon-outdent"></use></svg>
+              <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--rz180" aria-hidden="true"><use xlink:href="#icon-outdent"></use></svg>
             </el-menu-item>
             <el-menu-item index="2">
               <a href="//www.renren.io/" target="_blank">
                 <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-earth"></use></svg>
               </a>
             </el-menu-item>
-            <el-menu-item index="3" @click="refreshHandle()">
-              <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--refresh" aria-hidden="true"><use xlink:href="#icon-sync"></use></svg>
+            <el-menu-item index="3">
+              <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-sync"></use></svg>
             </el-menu-item>
-            <el-submenu index="4">
-              <template slot="title"><i class="el-icon-location"></i>我的工作台</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
-              <el-submenu index="2-4">
+            <el-menu-item index="4">
+              <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-fullscreen"></use></svg>
+            </el-menu-item>
+            <el-submenu index="5">
+              <template slot="title">我的工作台</template>
+              <el-menu-item index="5-1">选项1</el-menu-item>
+              <el-menu-item index="5-2">选项2</el-menu-item>
+              <el-menu-item index="5-3">选项3</el-menu-item>
+              <el-submenu index="5-4">
                 <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
+                <el-menu-item index="5-4-1">选项4-1</el-menu-item>
+                <el-menu-item index="5-4-2">选项4-2</el-menu-item>
+                <el-menu-item index="5-4-3">选项4-3</el-menu-item>
               </el-submenu>
             </el-submenu>
           </el-menu>
@@ -55,28 +65,26 @@
                 v-model="searchValue"
                 :fetch-suggestions="searchSuggestionsHandle"
                 placeholder="请输入内容"
-                class="aui-header__search-txt" :class="{ 'is-show': searchVisible }">
+                class="aui-header__search-txt" :class="{ 'aui-header__search-txt--show': searchVisible }">
               </el-autocomplete>
             </el-menu-item>
-            <el-menu-item index="2" @click="fullscreenHandle()">
-              <svg class="aui-header__icon-menu icon-svg" aria-hidden="true"><use xlink:href="#icon-fullscreen"></use></svg>
+            <el-menu-item index="2">
+              <el-dropdown placement="bottom">
+                <el-button size="mini">简体中文</el-button>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>简体中文</el-dropdown-item>
+                  <el-dropdown-item>繁體中文</el-dropdown-item>
+                  <el-dropdown-item>English</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </el-menu-item>
-            <el-submenu index="3">
-              <template slot="title">
-                <img class="aui-avatar" src="../img/avatar.png">
-                <span>{{ user.name }}</span>
-              </template>
-              <el-menu-item index="2-1">修改密码</el-menu-item>
-              <el-menu-item index="2-2">退出</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="4">
+            <el-menu-item index="3">
               <el-dropdown placement="bottom">
                 <span class="el-dropdown-link">
                   <img class="aui-avatar" src="../img/avatar.png">
                   <span>{{ user.name }}</span>
                   <i class="el-icon-arrow-down"></i>
                 </span>
-                <span></span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
                   <el-dropdown-item @click.native="logoutHandle()">退出</el-dropdown-item>
@@ -85,30 +93,6 @@
             </el-menu-item>
           </el-menu>
         </div>
-        <!-- 弹窗, 修改密码 -->
-        <el-dialog
-          title="修改密码"
-          :visible.sync="updatePasswordVisible"
-          :append-to-body="true">
-          <el-form :model="updatePasswordDataForm" :rules="updatePasswordDataRule" ref="updatePasswordDataForm" @keyup.enter.native="updatePasswordDataFormSubmit()" label-width="80px">
-            <el-form-item label="账号">
-              <span>{{ user.name }}</span>
-            </el-form-item>
-            <el-form-item label="原密码" prop="password">
-              <el-input type="password" v-model="updatePasswordDataForm.password" placeholder="原密码"></el-input>
-            </el-form-item>
-            <el-form-item label="新密码" prop="newPassword">
-              <el-input type="password" v-model="updatePasswordDataForm.newPassword" placeholder="新密码"></el-input>
-            </el-form-item>
-            <el-form-item label="确认密码" prop="confirmPassword">
-              <el-input type="password" v-model="updatePasswordDataForm.confirmPassword" placeholder="确认密码"></el-input>
-            </el-form-item>
-          </el-form>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="updatePasswordVisible = false">取消</el-button>
-            <el-button type="primary" @click="updatePasswordDataFormSubmit()">确定</el-button>
-          </span>
-        </el-dialog>
       </header>
       <!-- aui-aside -->
       <aside class="aui-aside" :class="'aui-aside--' + asideSkin">
@@ -129,7 +113,7 @@
         </div>
       </aside>
       <!-- aui-main -->
-      <main class="aui-main" :class="{ 'aui-main--tabs': isTab }">
+      <main class="aui-main">
         <el-row>
           <el-button>默认按钮</el-button>
           <el-button type="primary">主要按钮</el-button>
@@ -143,28 +127,34 @@
       <footer class="aui-footer">
         aui-footer
       </footer>
-      <!-- aui-skin-tools -->
-      <div class="aui-theme-tools" :class="{ 'aui-theme-tools--open': themeToolsIsOpen }">
-        <div class="aui-theme-tools__toggle" @click="themeToolsIsOpen = !themeToolsIsOpen">
+      <!-- aui-aside-control -->
+      <aside class="aui-aside-control" :class="{ 'aui-aside-control--open': asideControlIsOpen }">
+        <div class="aui-aside-control__toggle" @click="asideControlIsOpen = !asideControlIsOpen">
           <svg class="icon-svg" aria-hidden="true"><use xlink:href="#icon-setting"></use></svg>
         </div>
-        <div class="aui-theme-tools__content">
-          <div class="aui-theme-tools__item">
-            <h3>Header</h3>
-            <el-checkbox v-model="headerSkin" true-label="colorful">colorful 鲜艳</el-checkbox>
-          </div>
-          <div class="aui-theme-tools__item">
-            <h3>Aside</h3>
-            <el-checkbox v-model="asideSkin" true-label="dark">dark 黑色</el-checkbox>
-          </div>
-          <div class="aui-theme-tools__item">
-            <h3>Theme</h3>
-            <el-radio-group v-model="themeColor" @change="themeColorChangeHandle">
-              <el-radio v-for="item in themeList" :key="item.name" :label="item.name">{{ item.name }} {{ item.desc }}</el-radio>
-            </el-radio-group>
+        <div class="aui-aside-control__inner">
+          <div class="aui-aside-control__bd">
+            <dl class="aui-aside-control__setting">
+              <dt>Header</dt>
+              <dd><el-checkbox v-model="headerFixed">Fixed 固定</el-checkbox></dd>
+              <dd><el-checkbox v-model="headerSkin" true-label="colorful">Colorful 鲜艳</el-checkbox></dd>
+            </dl>
+            <dl class="aui-aside-control__setting">
+              <dt>Aside</dt>
+              <dd><el-checkbox v-model="asideFixed">Fixed 固定</el-checkbox></dd>
+              <dd><el-checkbox v-model="asideSkin" true-label="dark">Dark 黑色</el-checkbox></dd>
+            </dl>
+            <dl class="aui-aside-control__setting">
+              <dt>Skins</dt>
+              <dd v-for="item in skinList" :key="item.name">
+                <el-radio v-model="skin" :label="item.name" @change="skinChangeHandle">
+                  <span class="t-capitalize">{{ item.name }}</span> {{ item.remark }}
+                </el-radio>
+              </dd>
+            </dl>
           </div>
         </div>
-      </div>
+      </aside>
     </template>
   </div>
   <script src="../plugins/vue-2.5.17/vue.js"></script>
@@ -188,8 +178,10 @@
           loading: true,
           // 头部, 布局皮肤, white(白色) / colorful(鲜艳)
           headerSkin: 'white',
+          headerFixed: false,
           // 侧边, 布局皮肤, white(白色) / dark(黑色)
           asideSkin: 'white',
+          asideFixed: false,
           // 侧边, 折叠状态
           asideFold: false,
           // 侧边, 菜单
@@ -226,9 +218,9 @@
               { required: true, message: '必填项不能为空', trigger: 'blur' }
             ]
           },
-          themeToolsIsOpen: false,
-          themeList: [],
-          themeColor: 'turquoise'
+          asideControlIsOpen: false,
+          skin: 'turquoise',
+          skinList: []
         }
       },
       beforeCreate () {
@@ -236,7 +228,7 @@
       },
       created () {
         axios.get('../skins.json').then(function (res) {
-          vm.themeList = res.data;
+          vm.skinList = res.data;
         });
         axios.all([
           vm.getUserInfo(),
@@ -261,21 +253,21 @@
       },
       mounted () {
         // 窗口resize实现媒体查询
-        vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
-        window.addEventListener('resize', _.debounce(function () {
-          vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
-        }, 150));
+        // vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
+        // window.addEventListener('resize', _.debounce(function () {
+        //   vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
+        // }, 150));
       },
       methods: {
-        themeColorChangeHandle (val) {
+        skinChangeHandle (val) {
           var styleList = [
             {
               id: 'J_elementTheme',
               url: '../element-theme/' + val + '/index.css?t=' + new Date().getTime()
             },
             {
-              id: 'J_auiTheme',
-              url: '../element-theme/' + val + '/aui.css?t=' + new Date().getTime()
+              id: 'J_auiSKin',
+              url: '../css/skins/' + val + '.min.css?t=' + new Date().getTime()
             }
           ]
           for (var i = 0; i < styleList.length; i++) {
@@ -304,7 +296,7 @@
         getMenuList: function () {
           return axios.get('../mock/sys-menu-nav.json').then(function (res) {
             if (res.data && res.data.code === 0) {
-              vm.sidebarMenuList = res.data.data;
+              vm.asideMenuList = res.data.data;
             }
           })
         },
@@ -443,7 +435,7 @@
           <el-submenu\
             v-if="menu.children && menu.children.length >= 1"\
             :index="menu.id + \'\'"\
-            :popper-class="\'aui-aside--\' + asideSkin + \'-popper\'">\
+            :popper-append-to-body=\"false\">\
             <template slot="title">\
               <svg class="aui-aside__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
               <span>{{ menu.title }}</span>\
@@ -466,8 +458,8 @@
           }
         },
         computed: {
-          asideLayoutSkin: function () {
-            return vm.asideLayoutSkin;
+          asideSkin: function () {
+            return vm.asideSkin;
           }
         },
         methods: {

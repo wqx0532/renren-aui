@@ -1,13 +1,20 @@
 <include src="../templates/html-header.html" path=".."></include>
 <body>
-  <div class="aui-wrapper" :class="{ 'aui-aside--fold': asideFold }" v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
+  <div class="aui-wrapper"
+    :class="{
+      'aui-header--fixed': headerFixed,
+      'aui-aside--fixed': asideFixed,
+      'aui-aside--fold': asideFold
+    }"
+    v-loading.fullscreen.lock="loading"
+    element-loading-text="拼命加载中">
     <template v-if="!loading">
       <!-- aui-header -->
       <include src="../templates/layout-header.html"></include>
       <!-- aui-aside -->
       <include src="../templates/layout-aside.html"></include>
       <!-- aui-main -->
-      <main class="aui-main" :class="{ 'aui-main--tabs': isTab }">
+      <main class="aui-main">
         <el-row>
           <el-button>默认按钮</el-button>
           <el-button type="primary">主要按钮</el-button>
@@ -19,8 +26,8 @@
       </main>
       <!-- aui-footer -->
       <include src="../templates/layout-footer.html"></include>
-      <!-- aui-skin-tools -->
-      <include src="../templates/layout-skin-tools.html"></include>
+      <!-- aui-aside-control -->
+      <include src="../templates/layout-aside-control.html"></include>
     </template>
   </div>
   <include src="../templates/html-scripts.html" path=".."></include>
@@ -33,8 +40,10 @@
           loading: true,
           // 头部, 布局皮肤, white(白色) / colorful(鲜艳)
           headerSkin: 'white',
+          headerFixed: false,
           // 侧边, 布局皮肤, white(白色) / dark(黑色)
           asideSkin: 'white',
+          asideFixed: false,
           // 侧边, 折叠状态
           asideFold: false,
           // 侧边, 菜单
@@ -71,9 +80,9 @@
               { required: true, message: '必填项不能为空', trigger: 'blur' }
             ]
           },
-          themeToolsIsOpen: false,
-          themeList: [],
-          themeColor: 'turquoise'
+          asideControlIsOpen: false,
+          skin: 'turquoise',
+          skinList: []
         }
       },
       beforeCreate () {
@@ -81,7 +90,7 @@
       },
       created () {
         axios.get('../skins.json').then(function (res) {
-          vm.themeList = res.data;
+          vm.skinList = res.data;
         });
         axios.all([
           vm.getUserInfo(),
@@ -106,21 +115,21 @@
       },
       mounted () {
         // 窗口resize实现媒体查询
-        vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
-        window.addEventListener('resize', _.debounce(function () {
-          vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
-        }, 150));
+        // vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
+        // window.addEventListener('resize', _.debounce(function () {
+        //   vm.asideFold = document.documentElement['clientWidth'] <= 992 || false;
+        // }, 150));
       },
       methods: {
-        themeColorChangeHandle (val) {
+        skinChangeHandle (val) {
           var styleList = [
             {
               id: 'J_elementTheme',
               url: '../element-theme/' + val + '/index.css?t=' + new Date().getTime()
             },
             {
-              id: 'J_auiTheme',
-              url: '../element-theme/' + val + '/aui.css?t=' + new Date().getTime()
+              id: 'J_auiSKin',
+              url: '../css/skins/' + val + '.min.css?t=' + new Date().getTime()
             }
           ]
           for (var i = 0; i < styleList.length; i++) {
@@ -149,7 +158,7 @@
         getMenuList: function () {
           return axios.get('../mock/sys-menu-nav.json').then(function (res) {
             if (res.data && res.data.code === 0) {
-              vm.sidebarMenuList = res.data.data;
+              vm.asideMenuList = res.data.data;
             }
           })
         },
@@ -288,7 +297,7 @@
           <el-submenu\
             v-if="menu.children && menu.children.length >= 1"\
             :index="menu.id + \'\'"\
-            :popper-class="\'aui-aside--\' + asideSkin + \'-popper\'">\
+            :popper-append-to-body=\"false\">\
             <template slot="title">\
               <svg class="aui-aside__menu-icon icon-svg" aria-hidden="true"><use :xlink:href="\'#\' + (menu.icon || \'icon-yuanquan\')"></use></svg>\
               <span>{{ menu.title }}</span>\
@@ -311,8 +320,8 @@
           }
         },
         computed: {
-          asideLayoutSkin: function () {
-            return vm.asideLayoutSkin;
+          asideSkin: function () {
+            return vm.asideSkin;
           }
         },
         methods: {

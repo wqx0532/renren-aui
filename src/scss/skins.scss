@@ -1,0 +1,27 @@
+$skin--blue     : #3E8EF7;
+$skin--brown    : #997B71;
+$skin--cyan     : #0BB2D4;
+$skin--gray     : #757575;
+$skin--green    : #11C26D;
+$skin--indigo   : #667AFA;
+$skin--orange   : #EB6709;
+$skin--pink     : #F74584;
+$skin--purple   : #9463F7;
+$skin--red      : #FF4C52;
+$skin--turquoise: #17B3A3;
+$skin--yellow   : #FCB900;
+
+$skins: (
+  'blue'     : $skin--blue,
+  'brown'    : $skin--brown,
+  'cyan'     : $skin--cyan,
+  'gray'     : $skin--gray,
+  'green'    : $skin--green,
+  'indigo'   : $skin--indigo,
+  'orange'   : $skin--orange,
+  'pink'     : $skin--pink,
+  'purple'   : $skin--purple,
+  'red'      : $skin--red,
+  'turquoise': $skin--turquoise,
+  'yellow'   : $skin--yellow
+);

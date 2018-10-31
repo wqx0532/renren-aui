@@ -1,33 +1,36 @@
 <header class="aui-header" :class="'aui-header--' + headerSkin">
   <div class="aui-header__hd">
-    <h1 class="aui-brand">
-      <a class="aui-brand--lg" href="javascript:;">renren-aui</a>
-      <a class="aui-brand--sm" href="javascript:;">aui</a>
-    </h1>
+    <a class="aui-brand aui-brand--lg" href="javascript:;">renren-aui</a>
+    <a class="aui-brand aui-brand--sm" href="javascript:;">aui</a>
+    <!-- <h1 class="aui-brand">
+    </h1> -->
   </div>
   <div class="aui-header__bd">
     <el-menu class="aui-header__menu mr-auto" mode="horizontal">
       <el-menu-item index="1" @click="asideFold = !asideFold">
-        <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--switch" aria-hidden="true"><use xlink:href="#icon-outdent"></use></svg>
+        <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--rz180" aria-hidden="true"><use xlink:href="#icon-outdent"></use></svg>
       </el-menu-item>
       <el-menu-item index="2">
         <a href="//www.renren.io/" target="_blank">
           <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-earth"></use></svg>
         </a>
       </el-menu-item>
-      <el-menu-item index="3" @click="refreshHandle()">
-        <svg class="icon-svg aui-header__icon-menu aui-header__icon-menu--refresh" aria-hidden="true"><use xlink:href="#icon-sync"></use></svg>
+      <el-menu-item index="3">
+        <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-sync"></use></svg>
       </el-menu-item>
-      <el-submenu index="4">
-        <template slot="title"><i class="el-icon-location"></i>我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
+      <el-menu-item index="4">
+        <svg class="icon-svg aui-header__icon-menu" aria-hidden="true"><use xlink:href="#icon-fullscreen"></use></svg>
+      </el-menu-item>
+      <el-submenu index="5">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="5-1">选项1</el-menu-item>
+        <el-menu-item index="5-2">选项2</el-menu-item>
+        <el-menu-item index="5-3">选项3</el-menu-item>
+        <el-submenu index="5-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
+          <el-menu-item index="5-4-1">选项4-1</el-menu-item>
+          <el-menu-item index="5-4-2">选项4-2</el-menu-item>
+          <el-menu-item index="5-4-3">选项4-3</el-menu-item>
         </el-submenu>
       </el-submenu>
     </el-menu>
@@ -40,28 +43,26 @@
           v-model="searchValue"
           :fetch-suggestions="searchSuggestionsHandle"
           placeholder="请输入内容"
-          class="aui-header__search-txt" :class="{ 'is-show': searchVisible }">
+          class="aui-header__search-txt" :class="{ 'aui-header__search-txt--show': searchVisible }">
         </el-autocomplete>
       </el-menu-item>
-      <el-menu-item index="2" @click="fullscreenHandle()">
-        <svg class="aui-header__icon-menu icon-svg" aria-hidden="true"><use xlink:href="#icon-fullscreen"></use></svg>
+      <el-menu-item index="2">
+        <el-dropdown placement="bottom">
+          <el-button size="mini">简体中文</el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>简体中文</el-dropdown-item>
+            <el-dropdown-item>繁體中文</el-dropdown-item>
+            <el-dropdown-item>English</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </el-menu-item>
-      <el-submenu index="3">
-        <template slot="title">
-          <img class="aui-avatar" src="../img/avatar.png">
-          <span>{{ user.name }}</span>
-        </template>
-        <el-menu-item index="2-1">修改密码</el-menu-item>
-        <el-menu-item index="2-2">退出</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="4">
+      <el-menu-item index="3">
         <el-dropdown placement="bottom">
           <span class="el-dropdown-link">
             <img class="aui-avatar" src="../img/avatar.png">
             <span>{{ user.name }}</span>
             <i class="el-icon-arrow-down"></i>
           </span>
-          <span></span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
             <el-dropdown-item @click.native="logoutHandle()">退出</el-dropdown-item>
@@ -70,28 +71,4 @@
       </el-menu-item>
     </el-menu>
   </div>
-  <!-- 弹窗, 修改密码 -->
-  <el-dialog
-    title="修改密码"
-    :visible.sync="updatePasswordVisible"
-    :append-to-body="true">
-    <el-form :model="updatePasswordDataForm" :rules="updatePasswordDataRule" ref="updatePasswordDataForm" @keyup.enter.native="updatePasswordDataFormSubmit()" label-width="80px">
-      <el-form-item label="账号">
-        <span>{{ user.name }}</span>
-      </el-form-item>
-      <el-form-item label="原密码" prop="password">
-        <el-input type="password" v-model="updatePasswordDataForm.password" placeholder="原密码"></el-input>
-      </el-form-item>
-      <el-form-item label="新密码" prop="newPassword">
-        <el-input type="password" v-model="updatePasswordDataForm.newPassword" placeholder="新密码"></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="confirmPassword">
-        <el-input type="password" v-model="updatePasswordDataForm.confirmPassword" placeholder="确认密码"></el-input>
-      </el-form-item>
-    </el-form>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="updatePasswordVisible = false">取消</el-button>
-      <el-button type="primary" @click="updatePasswordDataFormSubmit()">确定</el-button>
-    </span>
-  </el-dialog>
 </header>

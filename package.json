@@ -32,8 +32,8 @@
     "gulp-util": "^3.0.8"
   },
   "element-theme": {
-    "config": "./src/scss/variables-element.scss",
-    "out": "./src/element-theme/default",
+    "config": "./src/element-theme/variables-element.scss",
+    "out": "./src/element-theme/blue",
     "minimize": true,
     "browsers": [
       "> 1%",
